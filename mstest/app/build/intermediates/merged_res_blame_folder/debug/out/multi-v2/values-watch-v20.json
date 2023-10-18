@@ -1,0 +1,20 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.codermuffin.mstest.app-mergeDebugResources-41:/values-watch-v20/values-watch-v20.xml",
+            "map": [
+                {
+                    "source": "/home/codermuffin/.gradle/caches/transforms-3/e6e9a15a1de0ce9cd2c86628ccfa272a/transformed/appcompat-1.0.0/res/values-watch-v20/values-watch-v20.xml",
+                    "from": {
+                        "startLines": "2,5,8",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "55,214,385",
+                        "endLines": "4,7,10",
+                        "endColumns": "12,12,12",
+                        "endOffsets": "209,380,553"
+                    }
+                }
+            ]
+        }
+    ]
+}
