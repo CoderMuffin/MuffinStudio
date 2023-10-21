@@ -4,6 +4,7 @@ import subprocess
 import modules.new
 import modules.util
 import modules.project
+import modules.run
 
 def usage():
     print("usage: muffin_studio <command>")
@@ -22,6 +23,9 @@ def find_project():
     else:
         modules.util.error("Could not find any projects nearby")
 
+def attach():
+    modules.run.attach_debug(modules.util.app_id(modules.project.find_project()))
+
 cmds = {
     "new": { 
         "desc": "Opens the interface to create a new project",
@@ -30,6 +34,14 @@ cmds = {
     "project": {
         "desc": "Finds the nearest project",
         "cmd": find_project
+    },
+    "run": {
+        "desc": "Install and run the project on any connected devices. Run with `--no-build` to start debugging on the remote device",
+        "cmd": modules.run.run_project
+    },
+    "attach": {
+        "desc": "Read from logcat on the remote device",
+        "cmd": attach
     }
 }
 
