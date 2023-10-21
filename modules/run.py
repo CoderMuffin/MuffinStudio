@@ -35,9 +35,9 @@ def attach_debug(id):
         pid = get_pid(id)
 
     modules.util.info(f"App pid={pid}")
-    log_process = subprocess.Popen("adb logcat", shell=True, stdout=subprocess.PIPE, text=True)
-    while True:
-        line = str(log_process.stdout.readline())
+    log_process = subprocess.Popen("adb logcat", shell=True, stdout=subprocess.PIPE)
+    for line in log_process.stdout:
+        line = line.decode("cp1252", errors="replace")
         if pid.strip() in line:
             line = line.replace(" D ", "\033[0;1;34m DEBUG \033[0m") \
                 .replace(" W ", "\033[0;1;33m WARN  \033[0m") \

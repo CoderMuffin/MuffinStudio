@@ -10,7 +10,7 @@ def find_and_replace(file_path, old_text, new_text):
         file.write(modified_content)
 
 def gradle_script():
-    return "./gradlew.bat" if platform.system() == "Windows" else "./gradlew"
+    return "gradlew.bat" if platform.system() == "Windows" else "./gradlew"
 
 def app_id(project):
     with open(os.path.join(project, "app", "build.gradle")) as f:
