@@ -1,3 +1,4 @@
+from collections.abc import Iterable
 import subprocess
 import modules.project
 import modules.util
@@ -15,16 +16,29 @@ def run_project():
     
     if not "--no-build" in sys.argv:
         modules.util.info(f"Compiling app id {id}")
-        gradle = subprocess.run(modules.util.gradle_script() + " installDebug", shell=True)
+
+        gradle = subprocess.run(modules.util.gradle_script() + " installDebug --console=rich", shell=True)
+
         if gradle.returncode != 0:
+            # if "com.android.ddmlib.InstallException: INSTALL_FAILED_UPDATE_INCOMPATIBLE" in None:
+            #     modules.util.warn("Failed to install due to bad update")
+            #     if input("Uninstall app (all non-persistent data will be lost)?").lower() in ["y", "yes"]:
+            #         subprocess.run(f"adb uninstall {id}")
+            #         modules.util.success("Uninstalled, rebuilding...")
+            #         run_project()
+            #     else:
+            #         modules.util.info("Cancelling")
+            # else:
+            
             modules.util.error(f"Could not start, gradle build failed")
+
             exit()
     
     subprocess.run(f"adb shell am start {id}/.MainActivity", shell=True)
     attach_debug(id)
 
 def get_pid(id):
-    return subprocess.Popen(f"adb shell pidof -s {id}", shell=True, stdout=subprocess.PIPE, text=True).stdout.readline()
+    return subprocess.run(f"adb shell pidof -s {id}", shell=True, capture_output=True, text=True).stdout
 
 def attach_debug(id):
     modules.util.info(f"Debugging app id {id}")
