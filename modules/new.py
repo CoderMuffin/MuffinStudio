@@ -47,7 +47,8 @@ def new_project():
         os.path.join(location, f"app/src/main/java/com/codermuffin", name.lower())
     )
 
-    with open(os.path.join(location, ".muffin_studio"), "x") as f:
+
+    with open(os.path.join(location, ".muffin_studio"), "w+") as f:
         json.dump({ "name": name }, f)
         f.write("\n")
 

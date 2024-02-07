@@ -1,6 +1,15 @@
 import platform
 import subprocess
 import os
+import time
+
+def await_device():
+    info("awaiting device")
+    while True:
+        time.sleep(1)
+        if subprocess.check_output("adb devices", shell=True).decode("utf-8").count("\n") > 2:
+            success("device connected")
+            break
 
 def find_and_replace(file_path, old_text, new_text):
     with open(file_path, 'r') as file:

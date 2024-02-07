@@ -5,6 +5,7 @@ import modules.new
 import modules.util
 import modules.project
 import modules.run
+import modules.wifi
 
 def usage():
     print("usage: muffin_studio <command>")
@@ -42,6 +43,10 @@ cmds = {
     "attach": {
         "desc": "Read from logcat on the remote device",
         "cmd": attach
+    },
+    "wifi": {
+        "desc": "Attach to a device over wifi",
+        "cmd": modules.wifi.connect
     }
 }
 
